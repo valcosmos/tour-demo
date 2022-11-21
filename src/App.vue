@@ -8,16 +8,17 @@ const current = ref<string[]>(['mail'])
 
 const visible = ref(false)
 
+const driver = new Driver()
+
 onMounted(async () => {
   visible.value = true
   setTimeout(() => {
     visible.value = false
     tour()
-  }, 1)
+  })
 })
 
 function tour() {
-  const driver = new Driver()
   driver.defineSteps([
     {
       element: '#menu',
@@ -89,7 +90,7 @@ function tour() {
           </template>
         </Dropdown>
       </MenuItem>
-      <MenuItem key="app" disabled>Navigation Two</MenuItem>
+      <MenuItem key="app" @click.stop="tour">Start wizard</MenuItem>
     </Menu>
   </div>
 </template>
